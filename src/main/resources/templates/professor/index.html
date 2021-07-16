@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head th:replace="~{fragmentos :: head('Lista professor')}">
+  </head>
+  <body>
+
+    <!--Modal de avisos-->
+    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                 Deseja deletar o Registro ?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" id="modalDelete" class="btn btn-danger">Deletar</button>
+            </div>
+          </div>
+        </div>
+      </div> 
+    <!--Modal de avisos-->
+
+    <header th:replace="~{fragmentos :: header('Lista de Professores')}"></header>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-sm table-hover ">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Salário</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each=" proLista: ${lista}">
+                            <th  scope="row" class="" th:text="${proLista.id}">ID</th>
+                            <td class="" th:text="${proLista.nome}">Nome</td>
+                            <td class="" th:text="${proLista.salario}">salario</td>
+                            <td class="" th:text="${proLista.status}">status</td>
+                           
+                            <td class="">
+                                <a th:href="@{/professores/{professorId}(professorId = ${proLista.id})}">detalhes</a>
+                                <a th:href="@{/professores/{professorId}/edit(professorId = ${proLista.id})}">editar</a>
+                                <a class="delete" th:href="${proLista.id}" data-toggle="modal" data-target="#modalExemplo">deletar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <a href="/professores/new">novo cadastro</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        
+        $(document).ready(function(){
+        var link_delete =  $('.delete');
+
+         link_delete.on('click',function(){
+
+                var btn = $(this).attr("href")
+
+               $('#modalDelete').on('click',function(){
+                    window.location.href="/professores/"+btn+"/delete";
+               }); 
+            })
+        })
+    </script>
+  </body>
+</html>

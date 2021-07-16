@@ -1,0 +1,30 @@
+<!--Fragmentos de formulario professor-->
+<div class="col-12" th:fragment="form(requisicaoProfessor, action)">
+    <form th:object="${requisicaoProfessor}" th:action="${action}" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" th:field="*{nome}" th:errorclass="is-invalid" class="form-control" placeholder="">
+                <div class="invalid-feedback" th:errors="*{nome}"></div>
+            </div>
+        
+            <div class="form-group">
+                <label for="salario">Salário</label>
+                <input type="text" th:field="*{salario}" th:errorclass="is-invalid" class="form-control" placeholder="">
+                <div class="invalid-feedback" th:errors="*{salario}"></div>
+            </div>
+        
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select th:field="*{status}" class="form-control">
+                    <option  th:each=" statusPro: ${status}" th:value="${statusPro}"
+                    th:text="${statusPro}"></option>
+                </select>   
+            </div>
+        
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary">
+                <a href="/professores">voltar</a>
+            </div>
+    </form>
+</div>
+<!--Fragmentos de formulario professor-->

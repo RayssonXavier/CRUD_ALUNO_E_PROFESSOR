@@ -1,0 +1,46 @@
+<div class="col-12" th:fragment="form(requisicaoAluno, action)">
+    <form th:object="${requisicaoAluno}" th:action="${action}" method="POST">
+        <div class="row">
+            <div class="form-group col-9">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" th:field="*{nome}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:errors="*{nome}"></div>
+            </div>
+            <div class="form-group col-3 col-sm-2">
+                <label for="idade">Idade:</label>
+                <input type="number" class="form-control" th:field="*{idade}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:errors="*{idade}"></div>
+            </div>
+            <div class="form-group col-3 col-sm-2">
+                <label for="data">Data nascimento:</label>
+                <input type="text" class="form-control data" th:field="*{dataNascimento}">
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="form-group col-12 col-sm-4">
+                <label for="nome">Turno:</label>
+                <select class="form-control" th:field="*{turno}">
+                    <option th:each=" tns: ${turnos}" th:value="${tns}" th:text="${tns}">
+                    </option>
+                </select>    
+            </div>
+            <div class="form-group col-12 col-sm-4">
+                <label for="nome">Serie:</label>
+                <select class="form-control" th:field="*{serieAluno}">
+                    <option th:each=" serie: ${series}" th:value="${serie}" th:text="${serie}">
+                    </option>
+                </select>    
+            </div>
+            <div class="form-group col-12 col-sm-4">
+                <label for="nome">Status:</label>
+                <select class="form-control" th:field="*{status}">
+                    <option th:each=" stts: ${statusaluno}" th:value="${stts}" th:text="${stts}">
+                    </option>
+                </select>    
+            </div>
+
+        </div>
+        <input type="submit" class="btn  btn-primary">
+        <button type="button" class="btn btn-secondary" 
+        th:onclick="'window.location.href=\'/alunos\''">Alunos</button>
+    </form>
+</div>
